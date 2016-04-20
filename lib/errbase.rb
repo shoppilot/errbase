@@ -2,8 +2,8 @@ require "errbase/version"
 
 module Errbase
   class << self
-    def report(e)
-      Rollbar.error(e) if defined?(Rollbar)
+    def report(e, options={})
+      Rollbar.error(e, options) if defined?(Rollbar)
       Airbrake.notify(e) if defined?(Airbrake)
       Honeybadger.notify(e) if defined?(Honeybadger)
       Exceptional.handle(e) if defined?(Exceptional)
